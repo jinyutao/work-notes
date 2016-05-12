@@ -12,5 +12,5 @@
 * [Puppet的安装和配置](Puppet的安装和配置.md)
 * [IPTables的配置方法讲解](IPTables的配置方法讲解.md)
 * [DNS配置](DNS配置.md)
-* 设置本地时钟同步
+* [设置本地时钟同步](设置本地时钟同步.md)
 
