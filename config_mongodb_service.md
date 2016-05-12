@@ -293,7 +293,7 @@ sh.shardCollection("<数据集合全名>",{key});
 如：
 sh.shardCollection("TSP20DB.fs.chunks",{ "files_id" : 1 });
 ```
-### 集群维护教程
+## 集群维护教程
 
 参考如下URL:
 * [集群维护教程](http://docs.mongoing.com/manual/administration/sharded-cluster-maintenance.html)
@@ -304,11 +304,11 @@ sh.shardCollection("TSP20DB.fs.chunks",{ "files_id" : 1 });
 
 
 
-### 性能监控
+## 性能监控
 
 目前，我们的云平台使用的是negios系统。而mongoDB也有negios的插件[Nagios-MongoDB](https://github.com/mzupan/nagios-plugin-mongodb)
 
-### 讨论
+## 讨论
 
 * 关于文件分片的片建的选择 
 
