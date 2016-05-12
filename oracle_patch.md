@@ -1,21 +1,22 @@
 # ORACLE 打补丁
 
-    所有命令在oracle用户下执行 
+* 
+所有命令在oracle用户下执行 
 
 1.准备环境变量
 
-export PATH=$PATH:/home/oracle/app/product/11.2.0/dbhome_1/OPatch
+  export PATH=$PATH:/home/oracle/app/product/11.2.0/dbhome_1/OPatch
 
 2.关闭侦听
 
-lsnrctl stop
+ lsnrctl stop
 
 3.关闭数据库
 
-sqlplus /nolog
-SQL> CONNECT / AS SYSDBA
-SQL> SHUTDOWN IMMEDIATE
-SQL> QUIT
+ sqlplus /nolog
+ SQL> CONNECT / AS SYSDBA
+ SQL> SHUTDOWN IMMEDIATE
+ SQL> QUIT
 
 4.执行patch
 
