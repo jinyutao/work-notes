@@ -268,49 +268,54 @@ db.createUser( { user: "superman",pwd: "XXXX",
             "dbAdminAnyDatabase",
             "readWriteAnyDatabase" ] } ) 
 # 上面的命令居然失败！！ config库中没有 "clusterAdmin"权限！！
-db.createUser( { user: "superman",pwd: "XXXX",roles: ["dbOwner","userAdmin"] } )
+db.createUser( { user: "superman",
+                  pwd: "XXXX",
+                  roles: ["dbOwner","userAdmin"] } )
 # 上面的命令是成功的。但感觉和集群操作无关。因为没有集群操作相关的权限
 db.auth("superman","XXXX")
 ```
 
-    初始化分片（sharding） 
+#### 初始化分片（sharding） 
 
 切换到admin库，并登陆用户
-
+```
 use admin
 db.auth("superman","superman")
-
+```
 追加片
-
+```
 sh.addShard("<副本集名/服务器的IP和port>")
 # 由于数据服务器我们使用的是副本集，因此，服务器的IP和port可以是副本集中的任意一台
-
+```
 配置需要开启分片的数据库
-
+```
 sh.enableSharding("<业务数据库>");
-
+```
 数据集合开启分片
-
+```
 sh.shardCollection("<数据集合全名>",{key});
 如：
 sh.shardCollection("TSP20DB.fs.chunks",{ "files_id" : 1 });
-
-[编辑] 集群维护教程
+```
+### 集群维护教程
 
 参考如下URL:
+* [集群维护教程](http://docs.mongoing.com/manual/administration/sharded-cluster-maintenance.html)
+* [保持域名不变迁移配置服务器](http://docs.mongoing.com/manual/tutorial/migrate-config-servers-with-same-hostname.html)
+* [迁移配置服务器到不同的域名](http://docs.mongoing.com/manual/tutorial/migrate-config-servers-with-different-hostnames.html)
+* [替换坏掉的配置服务器](http://docs.mongoing.com/manual/tutorial/replace-config-server.html)
 
-集群维护教程
-保持域名不变迁移配置服务器
-迁移配置服务器到不同的域名
-替换坏掉的配置服务器
 
-[编辑] 性能监控
 
-目前，我们的云平台使用的是negios系统。而mongoDB也有negios的插件 Nagios-MongoDB
-[编辑] 讨论
 
-    关于文件分片的片建的选择 
+### 性能监控
 
-对GridFS数据进行分片
+目前，我们的云平台使用的是negios系统。而mongoDB也有negios的插件[Nagios-MongoDB](https://github.com/mzupan/nagios-plugin-mongodb)
 
-    关于mongoDB容量扩展的方法 
+### 讨论
+
+* 关于文件分片的片建的选择 
+
+[对GridFS数据进行分片](http://docs.mongoing.com/manual-zh/tutorial/shard-gridfs-data.html)
+
+* 关于mongoDB容量扩展的方法 
