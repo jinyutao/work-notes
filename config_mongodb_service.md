@@ -170,20 +170,16 @@ killall mongos
 ```
 
 ## 构建存储
-
-
-
 生产环境下，为了以后的横向扩展，我们在初期就考虑构建分片。同时为了保证每一片数据的安全，我们的片都使用复制集来构建。
 
 ### 构建Replica Sets（复制集）
-
-* 在（复制集）上创建用户&分配权限 
-
+#### 在（复制集）上创建用户&分配权限 
 由于我们使用了[security:]字段，因此，我们只能在本地[127.0.0.1]上登陆，远程登陆将无法操作DB
 
 ```mongo 127.0.0.1:27018/admin```
 
 第一次登陆，且是在本地，由于DB中没有用户，所以可以做任何操作 创建用户：
+
 ```
 use admin  # 切换到admin库
 db.createUser({ user:"root", pwd:"root", 
@@ -191,11 +187,15 @@ roles: [{ role: "userAdminAnyDatabase", db: "admin" } ,
       { role: "dbOwner", db: "admin" }, 
       { role: "userAdmin", db: "admin" } ] } );
 ```
+
 如有用户必须的登陆后，方可操作
+
 ```
 db.auth("root","root");
 ```
+
 修改权限
+
 ```
 db.grantRolesToUser("root", 
  ["clusterAdmin",  # 此次追加项
@@ -211,10 +211,11 @@ db.grantRolesToUser("root",
 { role: "dbOwner", db: "admin" }
 { role: "userAdmin", db: "admin" }
 ```
+
 三者等价的，都能使该用户成为本地库的超级用户（雷同于：root,sa,administrator...）。
 权限 "clusterAdmin"，是赋予该用户**集群操作**。
 
-初始化Replica Sets（复制集） 
+#### 初始化Replica Sets（复制集） 
 
 初始化复制集的 主节点
 ```
@@ -223,50 +224,54 @@ rs.initiate({ _id:"<复制集名>", members:[ {_id:0,host:'<服务器的IP和por
 # 关于<服务器的IP和port>，即便我们现在是在本地登陆的，<服务器的IP>应该填写真实的IP地址
 ```
 追加其余数据服务器 从节点 在另一台服务器上，当我们成功启动了数据服务器后，继续前面的操作
-
+```
 rs.add('<另一台服务器的IP和port>');
-
+```
 追加 投票节点 通常投票节点服务器在性能上可以弱一点，当我们成功后启动，继续前面的操作
-
+```
 rs.addArb('<投票节点服务器的IP和port>');
-
+```
 确认
-
+```
 rs.status();
+```
 
-[编辑] 构建分片（sharding）
-
+### 构建分片（sharding）
 在配置服务器和路由服务器成功启动后
 
-    创建用户&分配权限 
+#### 创建用户&分配权限 
 
 和配置复制集一样，由于我们使用了[security:]字段，因此，我们只能在本地[127.0.0.1]上登陆，远程登陆将无法操作DB
-
+```
 mongo 127.0.0.1:27017/admin
-
+```
 登陆到mongoDB中：
-
+```
 use admin
 db.createUser({ user: "superman", pwd: "superman", 
     roles: [ "clusterAdmin",
              "userAdminAnyDatabase",
              "dbAdminAnyDatabase",
              "readWriteAnyDatabase" ] } )
-
+```
 关于权限定义，请参考前面的内容。 登陆后，开始后续操作
-
+```
 db.auth("superman","superman")
+```
+**注意**： 网上又说需要在config库中也追加相关用户，但测试下来发现无此需要。命令如下：
 
-注意： 网上又说需要在config库中也追加相关用户，但测试下来发现无此需要。命令如下：
-
+```
 use config
 db.createUser( { user: "superman",pwd: "XXXX",
-    roles: [ "clusterAdmin","userAdminAnyDatabase","dbAdminAnyDatabase","readWriteAnyDatabase" ] } ) 
+    roles: ["clusterAdmin",
+            "userAdminAnyDatabase",
+            "dbAdminAnyDatabase",
+            "readWriteAnyDatabase" ] } ) 
 # 上面的命令居然失败！！ config库中没有 "clusterAdmin"权限！！
 db.createUser( { user: "superman",pwd: "XXXX",roles: ["dbOwner","userAdmin"] } )
 # 上面的命令是成功的。但感觉和集群操作无关。因为没有集群操作相关的权限
 db.auth("superman","XXXX")
-
+```
 
     初始化分片（sharding） 
 
