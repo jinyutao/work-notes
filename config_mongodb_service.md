@@ -111,8 +111,8 @@ configDB: <配置服务器1 IP:Prot>,<配置服务器2 IP:Prot>,<配置服务器
 
 关于[security:]字段的说明：
 1. 由于是生产环境，并且我们所布署的云主机是和别的公司共用的，为了防止我们的DB数据被非法镜像，我们需要对所有接入MongoDB集群的服务器做认证。认证的方式可以是私有key也可以是ssl方式。但是，ssl方式是收费版才提供的，因此我们使用了私有key的认证方式。
-  1.1. 私有key方式仅仅是在服务器接入集群时作确认
-  1.2. .ssl方式则是在通讯时也同时作了加密 
+  1. 私有key方式仅仅是在服务器接入集群时作确认
+  2. .ssl方式则是在通讯时也同时作了加密 
 2. 一旦使用了[security:]字段，那意味着客户端认证模式也被打开，所有通过mongo或driver登入到DB的应用端将不能匿名的操作数据库。
 3. [security.keyFile]文件内容在所有的服务器上必须一致
 
@@ -121,24 +121,26 @@ configDB: <配置服务器1 IP:Prot>,<配置服务器2 IP:Prot>,<配置服务器
 openssl rand -base64 100 > /home/mongodata/keyfile/mongodb.pem -- 文件内容采base64编码，一共100个字符
 chmod 600 /home/mongodata/keyfile/mongodb.pem                  -- 仅DB实例用户可读写
 ```
-[编辑] 启动
+
+## 启动
 
 数据服务器:
 
-mongod -f <数据服务器配置文件>
+```mongod -f <数据服务器配置文件>```
 
 配置服务器:
 
-mongod -f <配置服务器配置文件>
+```mongod -f <配置服务器配置文件>```
 
 路由服务器:
 
-mongos -f <路由服务器配置文件>
+```mongos -f <路由服务器配置文件>```
 
 配置成OS服务的方法
 
+```
 # 复制服务脚本文件
-cp /etc/init.d/mongod /etc/init.d/{新的服务名} # 新的服务名 如：cp /etc/init.d/mongod /etc/init.d/mongod_rs
+cp /etc/init.d/mongod /etc/init.d/{新的服务名} # 新的服务名 如：cp /etc/init.d/mongod /etc/init.d/mongod_rs 
 
 # 修改配置文件
 vim /etc/init.d/{新的服务名}                   # 新的服务名 如：vim /etc/init.d/mongod_rs
@@ -147,12 +149,14 @@ vim /etc/init.d/{新的服务名}                   # 新的服务名 如：vim 
 # 如果配置的是路由服务器 
  # mongod=${MONGOD-/usr/bin/mongod} => mongod=${MONGOD-/usr/bin/mongos}
 
+
 # 注册服务 
 chkconfig --add {新的服务名}                   # 如：chkconfig --add mongod_rs 
 # 设置开机启动
 chkconfig {新的服务名} on                      # 如：chkconfig mongod_rs on
 # 启动服务
 service {新的服务名} start                      # 如：service mongod_rs start
+```
 
 注意：路由服务器中涉及到三台配置服务器，mongoDB要求所有的配置服务器的时间是一致的。我们通常要求所有的服务器同步时间。
 [编辑] 停止
