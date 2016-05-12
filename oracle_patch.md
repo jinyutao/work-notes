@@ -46,8 +46,6 @@ SQL> QUIT
 
 ```opatch lsinventory ```
 
-
-
 6.启动侦听
 
 ```lsnrctl start```
