@@ -2,8 +2,6 @@
 
 ## MongoDB的安装
 
-
-
 此处略。 请参考官网文档
 [http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/)
 通常安装完毕后，将所有的服务全部停止。以便于我们自定义配置
@@ -20,20 +18,16 @@ centOS:
 ubuntu:
 　待查
  ```
-
-
 ## 配置文件
-
-
 MongoDB的实例有三个角色，
-数据服务器: mongod [--shardsvr]
-配置服务器: mongod [--configsvr]
-路由服务器: mongos
+* 数据服务器: mongod [--shardsvr]
+* 配置服务器: mongod [--configsvr]
+* 路由服务器: mongos
 
 **注意**
 
-    1.<>中的内容，基于实际运行环境作相应的替换
-    2.并假定所有的文件存储和运行环境在/home/mongodata/下 
+1. <>中的内容，基于实际运行环境作相应的替换
+1. 并假定所有的文件存储和运行环境在/home/mongodata/下 
 
 **建议模板如下**
 
@@ -118,8 +112,11 @@ configDB: <配置服务器1 IP:Prot>,<配置服务器2 IP:Prot>,<配置服务器
 
 ```
 推荐:
-openssl rand -base64 100 > /home/mongodata/keyfile/mongodb.pem -- 文件内容采base64编码，一共100个字符
-chmod 600 /home/mongodata/keyfile/mongodb.pem                  -- 仅DB实例用户可读写
+-- 文件内容采base64编码，一共100个字符
+openssl rand -base64 100 > /home/mongodata/keyfile/mongodb.pem
+
+-- 仅DB实例用户可读写
+chmod 600 /home/mongodata/keyfile/mongodb.pem
 ```
 
 ## 启动
@@ -140,28 +137,27 @@ chmod 600 /home/mongodata/keyfile/mongodb.pem                  -- 仅DB实例用
 
 ```
 # 复制服务脚本文件
-cp /etc/init.d/mongod /etc/init.d/{新的服务名} # 新的服务名 如：cp /etc/init.d/mongod /etc/init.d/mongod_rs 
+cp /etc/init.d/mongod /etc/init.d/{新的服务名} 
+   # 新的服务名 如：cp /etc/init.d/mongod /etc/init.d/mongod_rs 
 # 修改配置文件
-vim /etc/init.d/{新的服务名}                   # 新的服务名 如：vim /etc/init.d/mongod_rs
+vim /etc/init.d/{新的服务名}
+   # 新的服务名 如：vim /etc/init.d/mongod_rs
 # 修改文件路径 
  # CONFIGFILE="服务器配置文件路径"
 # 如果配置的是路由服务器 
  # mongod=${MONGOD-/usr/bin/mongod} => mongod=${MONGOD-/usr/bin/mongos}
 
-
 # 注册服务 
-chkconfig --add {新的服务名}                   # 如：chkconfig --add mongod_rs 
+chkconfig --add {新的服务名} # 如：chkconfig --add mongod_rs 
 # 设置开机启动
-chkconfig {新的服务名} on                      # 如：chkconfig mongod_rs on
+chkconfig {新的服务名} on    # 如：chkconfig mongod_rs on
 # 启动服务
-service {新的服务名} start                      # 如：service mongod_rs start
+service {新的服务名} start   # 如：service mongod_rs start
 ```
 
 **注意：路由服务器中涉及到三台配置服务器，mongoDB要求所有的配置服务器的时间是一致的。我们通常要求所有的服务器同步时间。**
 
 ## 停止
-
-
 
 使用kill命令或
 ```
