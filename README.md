@@ -1,5 +1,3 @@
-# My Awesome Book
+# 好记性不如烂笔头
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
-
-rrrr
+记录了一些我在工作中遇到的问题和课题的解决方法
