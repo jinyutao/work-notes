@@ -5,7 +5,7 @@
 
 MongoDB、提供三个数据统计的函数，
 * group
-* Map-Reduce
 * aggregate 
+* Map-Reduce
 
 三者的区别请看[http://stackoverflow.com/questions/12337319/mongodb-aggregation-comparison-group-group-and-mapreduce](http://stackoverflow.com/questions/12337319/mongodb-aggregation-comparison-group-group-and-mapreduce)
