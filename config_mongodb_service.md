@@ -141,7 +141,6 @@ chmod 600 /home/mongodata/keyfile/mongodb.pem                  -- 仅DB实例用
 ```
 # 复制服务脚本文件
 cp /etc/init.d/mongod /etc/init.d/{新的服务名} # 新的服务名 如：cp /etc/init.d/mongod /etc/init.d/mongod_rs 
-
 # 修改配置文件
 vim /etc/init.d/{新的服务名}                   # 新的服务名 如：vim /etc/init.d/mongod_rs
 # 修改文件路径 
