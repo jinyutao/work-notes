@@ -9,5 +9,5 @@
 * [MongoDB 的大数据分析方法](mongodb_bigdata_analyz.md)
 * [SSH升级手顺](ssh_upgrade.md)
 * [LINUX 扩大卷的容量](linux_volume.md)
-* Puppet的安装和配置
+* [Puppet的安装和配置](Puppet的安装和配置.md)
 
