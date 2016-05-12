@@ -21,24 +21,26 @@
 
 5.授予用户acc，全库导出和全库导入的角色权限(生产环境建议用另一个用户，如acc_bak)
 
-grant EXP_FULL_DATABASE，IMP_FULL_DATABASE to acc;
+```grant EXP_FULL_DATABASE，IMP_FULL_DATABASE to acc;```
 
 
-## 创建表，初始化数据：
+## 创建表，初始化数据
 
 1.登陆acc用户
 
-```conn acc/"abc.123"```
+``` conn acc/"abc.123" ```
 
 2.导入建表sql文（假定建表sql文在/tmp下）
 
-```@/tmp/account.sql```
+
+``` @/tmp/account.sql ```
+
 
 3.导入追加数据sql文
 
-```@/tmp/accountInsert.sql```
+``` @/tmp/accountInsert.sql ```
 
 4.退出当前用户
 
-```quit```
+``` quit ```
 
