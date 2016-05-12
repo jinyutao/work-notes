@@ -4,6 +4,7 @@
 * ORACLE
    * [ORACLE 打补丁](oracle_patch.md)
    * [ORACLE 创建用户](oracle_create_user.md)
+* MongoDB
 * [MongoDB 配置](config_mongodb_service.md)
 * [MongoDB 安装后以服务方式启动](create_linux_service_mongodb.md)
 * [MongoDB API的使用](mongodb_api_usage.md)
@@ -16,5 +17,4 @@
 * [设置本地时钟同步](设置本地时钟同步.md)
 * [正则表达式教程](正则表达式教程.md)
 * [Spring多数据源实现](Spring多数据源实现.md)
-* MongoDB
 
