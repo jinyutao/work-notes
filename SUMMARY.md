@@ -16,6 +16,7 @@
    * [DNS配置](os_maintenance/DNS配置.md)
    * [设置本地时钟同步](os_maintenance/设置本地时钟同步.md)
    * [Puppet的安装和配置](os_maintenance/Puppet的安装和配置.md)
+   * Windows 远程登陆 Ubuntu
 * [软件技术 相关](software_technology/README.md)
    * [正则表达式教程](software_technology/正则表达式教程.md)
    * [Spring多数据源实现](software_technology/Spring多数据源实现.md)
