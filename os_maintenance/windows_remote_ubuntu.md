@@ -1,5 +1,5 @@
 # Windows 远程登陆 Ubuntu
 
-You need to run
-gsettings set org.gnome.Vino require-encryption false
-and reboot.
+ 1. You need to run
+ 2. gsettings set org.gnome.Vino require-encryption false
+ 3. and reboot.
