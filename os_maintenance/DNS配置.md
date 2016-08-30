@@ -5,18 +5,18 @@
 
 #####3. 进入setup，选择网络配置
 
-![进入setup，选择网络配置](resource/DNS-1.PNG)
+![进入setup，选择网络配置](/resource/DNS-1.PNG)
 
 #####4. 进入网络配置，选择设备配置。不要选择DNS配置
 
-![进入网络配置，选择设备配置。不要选择DNS配置](resource/DNS-2.PNG)
+![进入网络配置，选择设备配置。不要选择DNS配置](/resource/DNS-2.PNG)
 
 #####5. 进入设备配置，选择要配置的网卡
 
-![进入设备配置，选择要配置的网卡](resource/DNS-3.PNG)
+![进入设备配置，选择要配置的网卡](/resource/DNS-3.PNG)
 
 #####6. 进入网卡配置，设定DNS地址
 
-![进入网卡配置，设定DNS地址](resource/DNS-4.PNG)
+![进入网卡配置，设定DNS地址](/resource/DNS-4.PNG)
 
 对于云主机，能上网的网卡是明确的。因此，将DNS服务器的地址设定到具体的网卡上。 
