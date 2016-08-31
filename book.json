@@ -2,8 +2,8 @@
     "plugins": [
         "autocover"
     ],
-    "title": "My Book", 
-    "author": "Author", 
+    "title": "我的工作笔记", 
+    "author": "jinyutao", 
     "pluginsConfig": 
     { 
         "autocover": 
