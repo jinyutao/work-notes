@@ -2,10 +2,7 @@
     "plugins": [
         "autocover"
     ],
-    "pluginsConfig": 
-    { "autocover": 
-        { 
-            { 
+
                 "title": "My Book", 
                 "author": "Author", 
                 "pluginsConfig": 
@@ -16,8 +13,5 @@
                             "background": { "color": "#09F" } 
                         } 
                     } 
-            }
-        } 
-    }
 
 }
